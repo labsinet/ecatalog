@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "usbw",
+    "database": "tklib",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "usbw",
+    "database": "tklib",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "usbw",
+    "database": "tklib",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
