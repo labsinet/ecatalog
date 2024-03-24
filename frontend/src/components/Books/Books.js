@@ -34,7 +34,7 @@ const Books = () => {
 
     return (
         <div id='books'>
-            <span id="heading">AVAILABLE BOOKS</span>
+            <span id="heading">Доступні Книги</span>
             <table id="results" className="table text-center table-hover">
                 {header}
                 <tbody>

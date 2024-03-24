@@ -65,7 +65,7 @@ class Books extends React.Component {
             <div id='search' className="text-center">
                 <div>
                     <input className="form-control sel" type="text" placeholder="Введіть назву книги " id="id" ></input>
-                    <button className="btn btn-success" onClick={this.fetchData}>Submit</button>
+                    <button className="btn btn-success" onClick={this.fetchData}>Шукати</button>
                 </div><br/>
                 {this.state.name}
                 <table id="sResults" className="table table-hover">
