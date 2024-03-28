@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Books.css';
 
 const Books = () => {
+    const baseUrl = process.env.REACT_APP_BASE_URL;
+
     const [header] = useState(
         <thead id="header">
             <tr>
@@ -17,7 +19,7 @@ const Books = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch("http://localhost:5000/api/books");
+            const response = await fetch(`${baseUrl}api/books`);
             const data = await response.json();
             const filteredBooks = data.filter(book => book.count > 0);
             setBooks(filteredBooks.map(book => (
@@ -30,7 +32,7 @@ const Books = () => {
             )));
         };
         fetchData();
-    }, []);
+    }, [baseUrl]);
 
     return (
         <div id='books'>
