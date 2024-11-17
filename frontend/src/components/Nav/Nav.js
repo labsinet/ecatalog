@@ -1,32 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Nav.css';
 import { Link } from 'react-router-dom';
+import LoginComponent from '../LoginComponent/LoginComponent.jsx';
 
-class Nav extends React.Component {
-    
-    constructor(props) {
-        super(props);
-        this.update = this.update.bind(this);
-    }
+const Nav = () => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    state = {};
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
 
-    update() {
-        this.setState(this.state);
-    }
-
-    render(){
-        return (
-            <div id='nav'>
-                <img src='../../logo50x50.png' alt="logo" ></img>
+    return (
+        <nav id="nav">
+            <div className="nav-header">
+                <img src="../../logo50x50.png" alt="logo"></img>
                 <span id="navtext">e-КАТАЛОГ</span>
-                <ul>
-                    <li style={window.location.pathname === '/' ? {display: 'none'} : {display: 'inline-block'}}><Link to='/' onClick={this.update}>Головна</Link></li>
-                    <li style={window.location.pathname === '/search' ? {display: 'none'} : {display: 'inline-block'}}><Link to='/search' onClick={this.update}>Пошук по назві</Link></li>
-                </ul>
+                <button
+                    className="mobile-menu-toggle"
+                    onClick={toggleMobileMenu}
+                >
+                    ☰
+                </button>
             </div>
-        );
-    }
-}
+
+            <ul className={`nav-links ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
+                <li>
+                    <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+                        Головна
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/search" onClick={() => setIsMobileMenuOpen(false)}>
+                        Пошук по назві
+                    </Link>
+                </li>
+            </ul>
+
+            <div id="login-container">
+                <LoginComponent />
+            </div>
+        </nav>
+    );
+};
 
 export default Nav;

@@ -1,9 +1,8 @@
-// Import Product Model
-import Books from "../models/Books.js";
-import { Sequelize } from "sequelize";
-const Op = Sequelize.Op;
+const Books = require("../models/Books.js");
+const { Sequelize, Op } = require("sequelize");
+
 // Get all products
-export const getBooks = async (req, res) => {
+exports.getBooks = async (req, res) => {
     try {
         const product = await Books.findAll({
             order: [['year', 'DESC']], // Sort by year in descending order
@@ -13,10 +12,10 @@ export const getBooks = async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-}
- 
+};
+
 // Get product by id
-export const getBookById = async (req, res) => {
+exports.getBookById = async (req, res) => {
     try {
         const product = await Books.findAll({
             where: {
@@ -27,10 +26,10 @@ export const getBookById = async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-}
- 
+};
+
 // Create a new product
-export const createBook = async (req, res) => {
+exports.createBook = async (req, res) => {
     try {
         await Books.create(req.body);
         res.json({
@@ -39,10 +38,10 @@ export const createBook = async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-}
- 
+};
+
 // Update product by id
-export const updateBook = async (req, res) => {
+exports.updateBook = async (req, res) => {
     try {
         await Books.update(req.body, {
             where: {
@@ -55,10 +54,10 @@ export const updateBook = async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-}
- 
+};
+
 // Delete product by id
-export const deleteBook = async (req, res) => {
+exports.deleteBook = async (req, res) => {
     try {
         await Books.destroy({
             where: {
@@ -71,12 +70,12 @@ export const deleteBook = async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-}
+};
 
-//search books by name
-export  const getBookNames = async (req, res) => {
+// Search books by name
+exports.getBookNames = async (req, res) => {
     try {
-        const  name  = req.params.bookname;
+        const name = req.params.bookname;
 
         const books = await Books.findAll({
             where: { 
@@ -85,8 +84,6 @@ export  const getBookNames = async (req, res) => {
                 }
             },
             order: [['year', 'DESC']] // Sort by year in descending order
-            
-                 
         });
 
         res.json(books);
@@ -95,4 +92,3 @@ export  const getBookNames = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
-

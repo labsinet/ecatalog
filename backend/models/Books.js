@@ -1,11 +1,9 @@
-// import sequelize 
-import { Sequelize } from "sequelize";
-// import connection 
-import db from "../config/database.js";
- 
-// init DataTypes
-const { DataTypes } = Sequelize;
- 
+// Import sequelize 
+const { Sequelize, DataTypes } = require("sequelize");
+
+// Import connection 
+const db = require("../config/database.js");
+
 // Define schema
 const Books = db.define('books', {
   // Define attributes
@@ -54,6 +52,6 @@ const Books = db.define('books', {
   // Freeze Table Name
   freezeTableName: true
 });
- 
+
 // Export model Product
-export default Books;
+module.exports = Books;

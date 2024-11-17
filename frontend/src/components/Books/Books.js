@@ -16,10 +16,16 @@ const Books = () => {
     );
 
     const [books, setBooks] = useState([]);
+    const [error, setError] = useState(null); 
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`${baseUrl}api/books`);
+            try {
+                const response = await fetch(`${baseUrl}api/books`);
+                if (!response.ok) {
+                    throw new Error(`Помилка: ${response.status} ${response.statusText}`);
+                }
+
             const data = await response.json();
             const filteredBooks = data.filter(book => book.count > 0);
             setBooks(filteredBooks.map(book => (
@@ -30,21 +36,30 @@ const Books = () => {
                     <td>{book.bbk}</td>
                 </tr>
             )));
-        };
-        fetchData();
-    }, [baseUrl]);
+        } catch (err) {
+            setError(err.message); // Встановлення помилки
+        }
+    };
+    fetchData();
+}, [baseUrl]);
+
 
     return (
         <div id='books'>
             <span id="heading">Доступні Книги</span>
-            <table id="results" className="table text-center table-hover">
-                {header}
-                <tbody>
-                    {books}
-                </tbody>
-            </table>
+            {error ? (
+                <div className="error-message">Не вдалося завантажити дані</div>
+            ) : (
+                <table id="results" className="table text-center table-hover">
+                    {header}
+                    <tbody>
+                        {books}
+                    </tbody>
+                </table>
+            )}
         </div>
     );
 };
+
 
 export default Books;
